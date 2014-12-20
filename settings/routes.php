@@ -14,7 +14,7 @@ $application->registerRoutes($this, array(
 		'groups' => array('url' => '/settings/users/groups'),
 		'users' => array('url' => '/settings/users/users')
 	),
-	'routes' =>array(
+	'routes' => array(
 		array('name' => 'MailSettings#setMailSettings', 'url' => '/settings/admin/mailsettings', 'verb' => 'POST'),
 		array('name' => 'MailSettings#storeCredentials', 'url' => '/settings/admin/mailsettings/credentials', 'verb' => 'POST'),
 		array('name' => 'MailSettings#sendTestMail', 'url' => '/settings/admin/mailtest', 'verb' => 'POST'),
@@ -24,10 +24,21 @@ $application->registerRoutes($this, array(
 		array('name' => 'SecuritySettings#enforceSSLForSubdomains', 'url' => '/settings/admin/security/ssl/subdomains', 'verb' => 'POST'),
 		array('name' => 'SecuritySettings#trustedDomains', 'url' => '/settings/admin/security/trustedDomains', 'verb' => 'POST'),
 		array('name' => 'Users#setMailAddress', 'url' => '/settings/users/{id}/mailAddress', 'verb' => 'PUT'),
+		array('name' => 'LogSettings#setLogLevel', 'url' => '/settings/admin/log/level', 'verb' => 'POST'),
 	)
 ));
 
 /** @var $this \OCP\Route\IRouter */
+$this->create('settings.LogSettings.getEntries', '/settings/admin/log/entries')->get()
+	->action(function($params) {
+		$app = new Application($params);
+		$app->dispatch('LogSettingsController', 'getEntries');
+	});
+$this->create('settings.LogSettings.download', '/settings/admin/log/download')->get()
+	->action(function($params) {
+		$app = new Application($params);
+		$app->dispatch('LogSettingsController', 'getEntries');
+	});
 
 // Settings pages
 $this->create('settings_help', '/settings/help')
@@ -87,10 +98,6 @@ $this->create('settings_ajax_uninstallapp', '/settings/ajax/uninstallapp.php')
 $this->create('settings_ajax_navigationdetect', '/settings/ajax/navigationdetect.php')
 	->actionInclude('settings/ajax/navigationdetect.php');
 // admin
-$this->create('settings_ajax_getlog', '/settings/ajax/getlog.php')
-	->actionInclude('settings/ajax/getlog.php');
-$this->create('settings_ajax_setloglevel', '/settings/ajax/setloglevel.php')
-	->actionInclude('settings/ajax/setloglevel.php');
 $this->create('settings_ajax_excludegroups', '/settings/ajax/excludegroups.php')
 	->actionInclude('settings/ajax/excludegroups.php');
 $this->create('settings_ajax_checksetup', '/settings/ajax/checksetup')
