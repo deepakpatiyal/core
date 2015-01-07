@@ -1,14 +1,13 @@
 ### Steps to reproduce
-1.
-2.
-3.
+1. I my using android owncloud app 1.6 
+2. my smartphone  android version Is 4.4.2
+3. not able to sync files
 
 ### Expected behaviour
-Tell us what should happen
+android app should sync my images/files To cloud
 
-### Actual behaviour
-Tell us what happens instead
-
+### Actual behaviourMy
+app uploads the file as 1%...10%...&...100% buT after this it show error
 ### Server configuration
 **Operating system**:
 
